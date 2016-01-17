@@ -32,30 +32,11 @@ public class RestClient {
         mListeners.remove(l);
     }
 
-
-    public void getFilms(){
-        try {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://api.themoviedb.org")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            TheMovieDbService service = retrofit.create(TheMovieDbService.class);
-
-            Call films = service.getPopularMovies(API_KEY);
-
-            films.enqueue(new Callback() {
-                @Override
-                public void onResponse(Response response, Retrofit retrofit) {
-
-                }
-
-                @Override
-                public void onFailure(Throwable t) {
-                    Log.d(TAG, t.getMessage());
-                }
-            });
-        }catch (Exception ee){
-            String e = ee.getMessage();
-        }
+    Retrofit mRetrofit;
+    public RestClient(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 }
