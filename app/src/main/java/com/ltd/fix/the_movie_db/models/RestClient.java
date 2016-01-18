@@ -13,22 +13,19 @@ import retrofit.Retrofit;
 
 
 public class RestClient {
-    private static final String TAG = "RestClient";
     private static final String API_KEY = "405c542223f61538699ff98f04ccb6c4";
     public static final String BASE_URL = "http://api.themoviedb.org";
 
     public interface Listener {
-        void onFilmsLoaded(List<Movie> films);
+        void onFilmsLoaded(List<Movie> movies);
+
+        void onMovieDetailsLoaded(MovieDetails movieDetails);
     }
 
     List<Listener> mListeners = new ArrayList<>();
 
     public void addListener(Listener l) {
         mListeners.add(l);
-    }
-
-    public void removeListener(Listener l) {
-        mListeners.remove(l);
     }
 
 
@@ -40,6 +37,24 @@ public class RestClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         mService = retrofit.create(TheMovieDbService.class);
+    }
+
+    public void getMovieDetails(Integer id) {
+        Call movieDetailsContent = mService.getMovieDetails(id, API_KEY);
+        movieDetailsContent.enqueue(new Callback<MovieDetails>() {
+            @Override
+            public void onResponse(Response<MovieDetails> response, Retrofit retrofit) {
+                MovieDetails model = response.body();
+                if (model == null)
+                    return;
+                for (Listener l : mListeners)
+                    l.onMovieDetailsLoaded(model);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+            }
+        });
     }
 
     private Call getMoviesContent(MoviesRequestType moviesRequestType) {
@@ -59,9 +74,8 @@ public class RestClient {
         try {
             Call films = mService.searchMovies(API_KEY, searchQuery);
             enqueueMovies(films);
-        } catch (Exception e) {
-            String ee = e.getMessage();
-
+        } catch (Exception ex) {
+            String e = ex.getMessage();
         }
     }
 
@@ -69,8 +83,8 @@ public class RestClient {
         try {
             Call films = getMoviesContent(moviesRequestType);
             enqueueMovies(films);
-        } catch (Exception e) {
-            String ee = e.getMessage();
+        } catch (Exception ex) {
+            String e = ex.getMessage();
         }
     }
 
@@ -78,18 +92,19 @@ public class RestClient {
         moviesContent.enqueue(new Callback<Movies>() {
             @Override
             public void onResponse(Response<Movies> response, Retrofit retrofit) {
-                Movies movies = response.body();
-                if (movies == null)
+                Movies model = response.body();
+                if (model == null)
                     return;
-                List<Movie> myMovie = movies.getMovies();
+                List<Movie> myMovies = model.getMovies();
                 for (Listener l : mListeners)
-                    l.onFilmsLoaded(myMovie);
+                    l.onFilmsLoaded(myMovies);
             }
 
             @Override
             public void onFailure(Throwable t) {
-                Log.d(TAG, t.getMessage());
             }
         });
     }
+
+
 }

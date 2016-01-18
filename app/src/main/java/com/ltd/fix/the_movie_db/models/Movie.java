@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 public class Movie {
-    private static final String IMG_PATH = "http://image.tmdb.org/t/p/w500";
+    private static final String IMG_PATH = "http://image.tmdb.org/t/p/w320";
 
     @SerializedName("poster_path")
     @Expose
@@ -23,6 +23,9 @@ public class Movie {
     @Expose
     private String mReleaseDate;
 
+    @SerializedName("id")
+    @Expose
+    private Integer mId;
 
 
     public String getTitle() {
@@ -33,11 +36,15 @@ public class Movie {
         return IMG_PATH + mPosterPath;
     }
 
-    public String getOverview(){
+    public String getOverview() {
         return mOverview;
     }
 
-    public String getReleaseDate(){
+    public String getReleaseDate() {
         return mReleaseDate;
+    }
+
+    public Integer getId() {
+        return mId;
     }
 }

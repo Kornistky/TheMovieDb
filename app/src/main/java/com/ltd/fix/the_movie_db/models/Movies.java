@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class Movies {
-    @SerializedName("page")
-    @Expose
-    private String mPage;
+//    @SerializedName("page")
+//    @Expose
+//    private String mPage;
 
 
     @SerializedName("results")

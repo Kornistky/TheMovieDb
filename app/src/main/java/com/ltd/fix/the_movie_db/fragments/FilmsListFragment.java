@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.adapters.MyAdapter;
 import com.ltd.fix.the_movie_db.models.Movie;
+import com.ltd.fix.the_movie_db.models.MovieDetails;
 import com.ltd.fix.the_movie_db.models.MoviesRequestType;
 import com.ltd.fix.the_movie_db.models.RestClient;
 
@@ -48,8 +49,13 @@ public class FilmsListFragment extends Fragment {
         RestClient restClient = new RestClient();
         restClient.addListener(new RestClient.Listener() {
             @Override
-            public void onFilmsLoaded(List<Movie> films) {
-                mRecyclerView.setAdapter(new MyAdapter(getActivity(), films));
+            public void onFilmsLoaded(List<Movie> movies) {
+                mRecyclerView.setAdapter(new MyAdapter(getActivity(), movies));
+            }
+
+            @Override
+            public void onMovieDetailsLoaded(MovieDetails movieDetails) {
+
             }
         });
 
@@ -86,23 +92,6 @@ public class FilmsListFragment extends Fragment {
         ButterKnife.bind(this, view);
         Init();
         return view;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
