@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.fragments.FilmsListFragment;
+import com.ltd.fix.the_movie_db.models.MoviesRequestType;
 
 
 public class FilmsPagerAdapter extends FragmentPagerAdapter {
@@ -21,7 +22,16 @@ public class FilmsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return FilmsListFragment.newInstance("","");
+        switch (position){
+            case 0:
+                return FilmsListFragment.newInstance("","", MoviesRequestType.POPULAR);
+            case 1:
+                return FilmsListFragment.newInstance("","", MoviesRequestType.TOP_RATED);
+            case 2:
+                return FilmsListFragment.newInstance("","", MoviesRequestType.UPCOMING);
+            default:
+                return FilmsListFragment.newInstance("","", MoviesRequestType.POPULAR);
+        }
     }
 
     @Override

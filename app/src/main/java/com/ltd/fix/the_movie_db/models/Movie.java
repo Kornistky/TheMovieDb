@@ -3,11 +3,9 @@ package com.ltd.fix.the_movie_db.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by fix on 18.01.16.
- */
+
 public class Movie {
-    public static final String IMG_PATH = "http://image.tmdb.org/t/p/w342";
+    private static final String IMG_PATH = "http://image.tmdb.org/t/p/w500";
 
     @SerializedName("poster_path")
     @Expose
@@ -17,11 +15,29 @@ public class Movie {
     @Expose
     private String mTitle;
 
+    @SerializedName("overview")
+    @Expose
+    private String mOverview;
+
+    @SerializedName("release_date")
+    @Expose
+    private String mReleaseDate;
+
+
+
     public String getTitle() {
         return mTitle;
     }
 
     public String getImagePath() {
         return IMG_PATH + mPosterPath;
+    }
+
+    public String getOverview(){
+        return mOverview;
+    }
+
+    public String getReleaseDate(){
+        return mReleaseDate;
     }
 }

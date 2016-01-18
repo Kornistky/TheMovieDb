@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ltd.fix.the_movie_db.MainActivity;
@@ -48,6 +49,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         @Bind(R.id.item_img)
         ImageView imageView;
 
+        @Bind(R.id.release_date)
+        TextView mReleaseDate;
+
+        @Bind(R.id.film_overview)
+        TextView mOverview;
+
         public ViewHolder(View v){
             super(v);
             ButterKnife.bind(this,v);
@@ -55,6 +62,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         public void bind(Movie movie){
             mTextView.setText(movie.getTitle());
+            mOverview.setText(movie.getOverview());
+            mReleaseDate.setText(movie.getReleaseDate());
             Picasso.with(mContext)
                     .load(movie.getImagePath())
                     .resize(200, 200)

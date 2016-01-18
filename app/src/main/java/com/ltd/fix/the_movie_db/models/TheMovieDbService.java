@@ -2,7 +2,6 @@ package com.ltd.fix.the_movie_db.models;
 
 import retrofit.Call;
 import retrofit.http.GET;
-import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -16,4 +15,10 @@ public interface TheMovieDbService {
 
     @GET("/3/movie/top_rated")
     Call<Movies> getTopRatedMovies(@Query("api_key") String apiKey);
+
+    @GET("/3/movie/upcoming")
+    Call<Movies> getUpcomingMovies(@Query("api_key") String apiKey);
+
+    @GET("/3/search/movie")
+    Call<Movies> searchMovies(@Query("api_key") String apiKey, @Query("query") String searchQuery);
 }
