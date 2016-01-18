@@ -41,7 +41,7 @@ public class FilmsListFragment extends Fragment {
 
     private void Init(){
 
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mRecyclerView.setHasFixedSize(true);
 
         RestClient restClient = new RestClient();
