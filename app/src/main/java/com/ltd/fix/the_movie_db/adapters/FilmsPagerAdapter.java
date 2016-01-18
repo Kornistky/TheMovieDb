@@ -24,13 +24,13 @@ public class FilmsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return FilmsListFragment.newInstance("","", MoviesRequestType.POPULAR);
+                return FilmsListFragment.newInstance( MoviesRequestType.POPULAR);
             case 1:
-                return FilmsListFragment.newInstance("","", MoviesRequestType.TOP_RATED);
+                return FilmsListFragment.newInstance( MoviesRequestType.TOP_RATED);
             case 2:
-                return FilmsListFragment.newInstance("","", MoviesRequestType.UPCOMING);
+                return FilmsListFragment.newInstance( MoviesRequestType.UPCOMING);
             default:
-                return FilmsListFragment.newInstance("","", MoviesRequestType.POPULAR);
+                return FilmsListFragment.newInstance( MoviesRequestType.POPULAR);
         }
     }
 

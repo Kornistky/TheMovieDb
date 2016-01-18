@@ -31,7 +31,7 @@ public class SearchableActivity extends AppCompatActivity implements FilmsListFr
 
         Fragment fragment = fm.findFragmentById(R.id.searchable_content);
         if (fragment == null) {
-            fragment = FilmsListFragment.newInstance(query, "", MoviesRequestType.SEARCH);
+            fragment = FilmsListFragment.newInstance(MoviesRequestType.SEARCH);
             fm.beginTransaction()
                     .add(R.id.searchable_content, fragment)
                     .commit();
