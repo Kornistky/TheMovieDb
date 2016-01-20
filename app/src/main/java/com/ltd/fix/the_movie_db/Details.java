@@ -1,18 +1,17 @@
 package com.ltd.fix.the_movie_db;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.StringBuilderPrinter;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.ltd.fix.the_movie_db.models.Movie;
-import com.ltd.fix.the_movie_db.models.MovieDetails;
-import com.ltd.fix.the_movie_db.models.RestClient;
-import com.squareup.picasso.Picasso;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.ltd.fix.the_movie_db.network.Movie;
+import com.ltd.fix.the_movie_db.network.MovieDetails;
+import com.ltd.fix.the_movie_db.network.RestClient;
 
 import java.util.List;
 
@@ -28,6 +27,7 @@ public class Details extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -62,7 +62,7 @@ public class Details extends AppCompatActivity {
     TextView mMovieTagLine;
 
     @Bind(R.id.item_act)
-    ImageView imageView;
+    SimpleDraweeView draweeView;
 
     @Bind(R.id.data)
     TextView mDate;
@@ -78,10 +78,7 @@ public class Details extends AppCompatActivity {
         mMovieTagLine.setText(movieDetails.getTagLine());
         mDate.setText(movieDetails.getReleaseDate());
         mLanguage.setText(movieDetails.getOriginalLanguage());
-        Picasso.with(mContext)
-                .load(movieDetails.getImagePath())
-                .resize(250,250)
-                .centerCrop()
-                .into(imageView);
+        draweeView.setImageURI(Uri.parse(movieDetails.getImagePath()));
+
     }
 }

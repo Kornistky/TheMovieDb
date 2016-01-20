@@ -1,6 +1,5 @@
 package com.ltd.fix.the_movie_db.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,10 +12,10 @@ import android.view.ViewGroup;
 
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.adapters.MyAdapter;
-import com.ltd.fix.the_movie_db.models.Movie;
-import com.ltd.fix.the_movie_db.models.MovieDetails;
-import com.ltd.fix.the_movie_db.models.MoviesRequestType;
-import com.ltd.fix.the_movie_db.models.RestClient;
+import com.ltd.fix.the_movie_db.network.Movie;
+import com.ltd.fix.the_movie_db.network.MovieDetails;
+import com.ltd.fix.the_movie_db.network.MoviesRequestType;
+import com.ltd.fix.the_movie_db.network.RestClient;
 
 import java.util.List;
 
@@ -26,8 +25,12 @@ import butterknife.ButterKnife;
 
 public class FilmsListFragment extends Fragment {
     private static final String MOVIE_TYPE = "movie_type";
+    public static final String ARG_PARAM1="param_1";
+    public static final String ARG_PARAM2="param_2";
 
     private MoviesRequestType moviesRequestType;
+    private String mParam1;
+    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,12 +61,14 @@ public class FilmsListFragment extends Fragment {
         if (moviesRequestType != moviesRequestType.SEARCH)
             restClient.getMovies(moviesRequestType);
         else
-            restClient.searchMovies(null);
+            restClient.searchMovies(mParam1);
     }
 
-    public static FilmsListFragment newInstance(MoviesRequestType moviesRequestType) {
+    public static FilmsListFragment newInstance(String param1, String param2,MoviesRequestType moviesRequestType) {
         FilmsListFragment fragment = new FilmsListFragment();
         Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         args.putSerializable(MOVIE_TYPE, moviesRequestType);
         fragment.setArguments(args);
         return fragment;
@@ -73,6 +78,8 @@ public class FilmsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
             moviesRequestType = (MoviesRequestType) getArguments().getSerializable(MOVIE_TYPE);
         }
     }

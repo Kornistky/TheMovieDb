@@ -1,4 +1,4 @@
-package com.ltd.fix.the_movie_db.models;
+package com.ltd.fix.the_movie_db.network;
 
 /**
  * Created by fix on 18.01.16.

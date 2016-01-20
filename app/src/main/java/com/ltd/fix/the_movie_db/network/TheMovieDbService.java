@@ -1,4 +1,4 @@
-package com.ltd.fix.the_movie_db.models;
+package com.ltd.fix.the_movie_db.network;
 
 import retrofit.Call;
 import retrofit.http.GET;

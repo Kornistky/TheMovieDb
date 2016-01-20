@@ -1,4 +1,4 @@
-package com.ltd.fix.the_movie_db.models;
+package com.ltd.fix.the_movie_db.network;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,9 +7,9 @@ import java.util.List;
 
 
 public class Movies {
-//    @SerializedName("page")
-//    @Expose
-//    private String mPage;
+    @SerializedName("page")
+    @Expose
+    private String mPage;
 
 
     @SerializedName("results")

@@ -1,6 +1,4 @@
-package com.ltd.fix.the_movie_db.models;
-
-import android.util.Log;
+package com.ltd.fix.the_movie_db.network;
 
 import java.util.ArrayList;
 import java.util.List;

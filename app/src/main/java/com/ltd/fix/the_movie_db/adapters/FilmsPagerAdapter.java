@@ -4,13 +4,14 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.fragments.FilmsListFragment;
-import com.ltd.fix.the_movie_db.models.MoviesRequestType;
+import com.ltd.fix.the_movie_db.network.MoviesRequestType;
 
 
-public class FilmsPagerAdapter extends FragmentPagerAdapter {
+public class FilmsPagerAdapter extends FragmentStatePagerAdapter {
     public static  int items = 3;
 
     private Context mContext;
@@ -24,13 +25,13 @@ public class FilmsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return FilmsListFragment.newInstance( MoviesRequestType.POPULAR);
+                return FilmsListFragment.newInstance("","", MoviesRequestType.POPULAR);
             case 1:
-                return FilmsListFragment.newInstance( MoviesRequestType.TOP_RATED);
+                return FilmsListFragment.newInstance("","", MoviesRequestType.TOP_RATED);
             case 2:
-                return FilmsListFragment.newInstance( MoviesRequestType.UPCOMING);
+                return FilmsListFragment.newInstance("","", MoviesRequestType.UPCOMING);
             default:
-                return FilmsListFragment.newInstance( MoviesRequestType.POPULAR);
+                return FilmsListFragment.newInstance("","", MoviesRequestType.POPULAR);
         }
     }
 

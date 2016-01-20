@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="25dp"
         android:orientation="vertical">
 
         <TextView
@@ -27,49 +29,54 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
+
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/item_act"
-            android:layout_width="125dp"
-            android:layout_height="130dp"/>
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            fresco:roundAsCircle="true"
+            fresco:roundedCornerRadius="1dp"
+            fresco:roundingBorderWidth="2dp" />
 
         <TextView
-            android:layout_marginTop="-80dp"
-            android:layout_marginLeft="94dp"
             android:id="@+id/tagline"
             android:layout_width="235dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginLeft="94dp"
+            android:layout_marginTop="-80dp"
             android:text="Загрузка "
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
+
         <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp"
             android:drawableLeft="@drawable/ic_date_range_black_24dp"
             android:drawablePadding="@dimen/dw_padding"
-            android:id="@+id/data"
-            android:layout_marginLeft="140dp"
-            android:text="Дата "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="Дата " />
 
         <TextView
+            android:id="@+id/language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp"
+            android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/ic_language_black_24dp"
             android:drawablePadding="@dimen/dw_padding"
-            android:id="@+id/language"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="140dp"
-            android:text="Загрузка языка"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:text="Загрузка языка" />
 
 
         <TextView
-            android:drawableLeft="@drawable/ic_assignment_black_24dp"
-            android:drawablePadding="@dimen/dw_padding"
-            android:textStyle="normal"
             android:id="@+id/movie_overview"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="center"
-            android:text="@string/downloading" />
+            android:drawableLeft="@drawable/ic_assignment_black_24dp"
+            android:drawablePadding="@dimen/dw_padding"
+            android:text="@string/downloading"
+            android:textStyle="normal" />
 
     </LinearLayout>
 </RelativeLayout>

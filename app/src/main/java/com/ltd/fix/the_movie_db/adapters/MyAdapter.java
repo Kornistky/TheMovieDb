@@ -2,26 +2,19 @@ package com.ltd.fix.the_movie_db.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.ltd.fix.the_movie_db.Details;
-import com.ltd.fix.the_movie_db.MainActivity;
 import com.ltd.fix.the_movie_db.R;
-import com.ltd.fix.the_movie_db.models.Movie;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
-
+import com.ltd.fix.the_movie_db.network.Movie;
 import java.util.List;
 
 import butterknife.Bind;
@@ -35,6 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Fresco.initialize(mContext);
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_view, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -56,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         TextView mTextView;
 
         @Bind(R.id.item_img)
-        ImageView imageView;
+        SimpleDraweeView simpleDraweeView;
 
         @Bind(R.id.release_date)
         TextView mReleaseDate;
@@ -83,12 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             mOverview.setText(movie.getOverview());
             mReleaseDate.setText(movie.getReleaseDate());
             mId = movie.getId();
-            Picasso.with(mContext)
-                    .load(movie.getImagePath())
-                    .resize(200, 200)
-                    .transform(new CircleTransform())
-                    .centerCrop()
-                    .into(imageView);
+            simpleDraweeView.setImageURI(Uri.parse(movie.getImagePath()));
         }
     }
 
@@ -97,40 +86,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         mData=Data;
         mContext=context;
     }
-
-    public class CircleTransform implements Transformation {
-        @Override
-        public Bitmap transform(Bitmap source) {
-            int size = Math.min(source.getWidth(), source.getHeight());
-
-            int x = (source.getWidth() - size) / 2;
-            int y = (source.getHeight() - size) / 2;
-
-            Bitmap squaredBitmap = Bitmap.createBitmap(source, x, y, size, size);
-            if (squaredBitmap != source) {
-                source.recycle();
-            }
-
-            Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
-
-            Canvas canvas = new Canvas(bitmap);
-            Paint paint = new Paint();
-            BitmapShader shader = new BitmapShader(squaredBitmap,
-                    BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
-            paint.setShader(shader);
-            paint.setAntiAlias(true);
-
-            float r = size / 2f;
-            canvas.drawCircle(r, r, r, paint);
-
-            squaredBitmap.recycle();
-            return bitmap;
-        }
-
-        @Override
-        public String key() {
-            return "circle";
-        }
-    }
-
 }

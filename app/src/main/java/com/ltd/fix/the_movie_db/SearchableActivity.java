@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.ltd.fix.the_movie_db.fragments.FilmsListFragment;
-import com.ltd.fix.the_movie_db.models.MoviesRequestType;
+import com.ltd.fix.the_movie_db.network.MoviesRequestType;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +31,7 @@ public class SearchableActivity extends AppCompatActivity implements FilmsListFr
 
         Fragment fragment = fm.findFragmentById(R.id.searchable_content);
         if (fragment == null) {
-            fragment = FilmsListFragment.newInstance(MoviesRequestType.SEARCH);
+            fragment = FilmsListFragment.newInstance(query,"",MoviesRequestType.SEARCH);
             fm.beginTransaction()
                     .add(R.id.searchable_content, fragment)
                     .commit();

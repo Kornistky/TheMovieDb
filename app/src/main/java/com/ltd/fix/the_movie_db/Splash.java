@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class Splash extends Activity {
+    public static final int time_out = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,6 @@ public class Splash extends Activity {
                 startActivity(i);
                 finish();
             }
-        },3*1000);
+        },time_out);
     }
 }
