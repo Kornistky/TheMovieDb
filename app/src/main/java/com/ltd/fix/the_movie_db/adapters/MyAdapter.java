@@ -11,10 +11,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.common.ResizeOptions;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.ltd.fix.the_movie_db.Details;
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.network.Movie;
+
 import java.util.List;
 
 import butterknife.Bind;
@@ -25,12 +30,13 @@ import butterknife.OnClick;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Movie> mData;
     Context mContext;
+    int width = 180, height = 180;
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Fresco.initialize(mContext);
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_view, parent,false);
+                .inflate(R.layout.item_view, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -61,29 +67,43 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private int mId;
 
         @Nullable
-        @OnClick(R.id.card_view) void onCardClicked(){
+        @OnClick(R.id.card_view)
+        void onCardClicked() {
             Intent intent = new Intent(mContext, Details.class);
             intent.putExtra(Details.ID_PARAM, mId);
             mContext.startActivity(intent);
         }
 
-        public ViewHolder(View v){
+        public ViewHolder(View v) {
             super(v);
-            ButterKnife.bind(this,v);
+            ButterKnife.bind(this, v);
         }
 
-        public void bind(Movie movie){
+        public void bind(Movie movie) {
             mTextView.setText(movie.getTitle());
             mOverview.setText(movie.getOverview());
             mReleaseDate.setText(movie.getReleaseDate());
             mId = movie.getId();
-            simpleDraweeView.setImageURI(Uri.parse(movie.getImagePath()));
+
+
+            ImageRequest request = ImageRequestBuilder
+                    .newBuilderWithSource(Uri.parse(movie.getImagePath()))
+                    .setResizeOptions(new ResizeOptions(width, height))
+                    .setAutoRotateEnabled(true)
+                    .setLocalThumbnailPreviewsEnabled(true)
+                    .setProgressiveRenderingEnabled(true)
+                    .build();
+            DraweeController controller = Fresco.newDraweeControllerBuilder()
+                    .setImageRequest(request)
+                    .setOldController(simpleDraweeView.getController())
+                    .build();
+            simpleDraweeView.setController(controller);
         }
     }
 
 
-    public MyAdapter(Context context, List<Movie> Data){
-        mData=Data;
-        mContext=context;
+    public MyAdapter(Context context, List<Movie> Data) {
+        mData = Data;
+        mContext = context;
     }
 }
