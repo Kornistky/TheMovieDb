@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -20,9 +22,9 @@ import butterknife.ButterKnife;
 
 public class Details extends AppCompatActivity {
     public static final String ID_PARAM = "id_param";
-    Context mContext;
+//    Context mContext;
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar toolbar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,11 @@ public class Details extends AppCompatActivity {
         Fresco.initialize(this);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        if (toolbar != null) {
+            setTitle("Детали фильма");
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         init();
     }
 
@@ -52,6 +58,22 @@ public class Details extends AppCompatActivity {
         restClient.getMovieDetails(id);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+
+            case android.R.id.home:
+                this.finish();
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     @Bind(R.id.movie_title)
     TextView mMovieTitle;
 
@@ -62,7 +84,7 @@ public class Details extends AppCompatActivity {
     TextView mMovieTagLine;
 
     @Bind(R.id.item_act)
-    SimpleDraweeView draweeView;
+    SimpleDraweeView mDrawerView;
 
     @Bind(R.id.data)
     TextView mDate;
@@ -78,7 +100,7 @@ public class Details extends AppCompatActivity {
         mMovieTagLine.setText(movieDetails.getTagLine());
         mDate.setText(movieDetails.getReleaseDate());
         mLanguage.setText(movieDetails.getOriginalLanguage());
-        draweeView.setImageURI(Uri.parse(movieDetails.getImagePath()));
+        mDrawerView.setImageURI(Uri.parse(movieDetails.getImagePath()));
 
     }
 }
