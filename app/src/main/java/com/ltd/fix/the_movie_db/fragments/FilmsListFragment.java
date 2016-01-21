@@ -17,6 +17,7 @@ import com.ltd.fix.the_movie_db.network.MovieDetails;
 import com.ltd.fix.the_movie_db.network.MoviesRequestType;
 import com.ltd.fix.the_movie_db.network.RestClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;

@@ -97,7 +97,6 @@ public class RestClient {
                 for (Listener l : mListeners)
                     l.onFilmsLoaded(myMovies);
             }
-
             @Override
             public void onFailure(Throwable t) {
             }
