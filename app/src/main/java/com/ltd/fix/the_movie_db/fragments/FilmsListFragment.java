@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.adapters.MyAdapter;
 import com.ltd.fix.the_movie_db.network.Movie;
@@ -17,7 +16,6 @@ import com.ltd.fix.the_movie_db.network.MovieDetails;
 import com.ltd.fix.the_movie_db.network.MoviesRequestType;
 import com.ltd.fix.the_movie_db.network.RestClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;

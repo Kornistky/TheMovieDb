@@ -2,13 +2,11 @@ package com.ltd.fix.the_movie_db;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.Bundle;
-
-import java.util.concurrent.TimeUnit;
+import android.os.Handler;
 
 public class Splash extends Activity {
-    public static final int time_out = (int) TimeUnit.SECONDS.toMillis(2);
+    public static final int time_out = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

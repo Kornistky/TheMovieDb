@@ -30,6 +30,7 @@ import butterknife.OnClick;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Movie> mData;
     Context mContext;
+    int width = 180, height = 180;
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -83,10 +84,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             mOverview.setText(movie.getOverview());
             mReleaseDate.setText(movie.getReleaseDate());
             mId = movie.getId();
-            simpleDraweeView.setImageURI(Uri.parse(movie.getImagePath()));
+
+
             ImageRequest request = ImageRequestBuilder
                     .newBuilderWithSource(Uri.parse(movie.getImagePath()))
-                    .setResizeOptions(new ResizeOptions(180, 180))
+                    .setResizeOptions(new ResizeOptions(width, height))
                     .setAutoRotateEnabled(true)
                     .setLocalThumbnailPreviewsEnabled(true)
                     .setProgressiveRenderingEnabled(true)
@@ -96,7 +98,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     .setOldController(simpleDraweeView.getController())
                     .build();
             simpleDraweeView.setController(controller);
-
         }
     }
 
