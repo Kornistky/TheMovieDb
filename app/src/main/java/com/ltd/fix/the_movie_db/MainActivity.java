@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity implements FilmsListFragment
         mViewPager.setAdapter(adapter);
         setSupportActionBar(toolbar);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.popular_films));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.top_rated_films));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.upcoming_films));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.top_rated_films));
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -78,11 +78,12 @@ public class MainActivity extends AppCompatActivity implements FilmsListFragment
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+        switch (id) {
             case R.id.menu_item_search:
                 onSearchRequested();
                 break;
-            default: break;
+            default:
+                break;
         }
 
         return super.onOptionsItemSelected(item);

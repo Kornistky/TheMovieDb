@@ -12,7 +12,7 @@ import com.ltd.fix.the_movie_db.network.MoviesRequestType;
 
 
 public class FilmsPagerAdapter extends FragmentStatePagerAdapter {
-    public static  int items = 3;
+    public static final int items = 3;
 
     private Context mContext;
 
@@ -46,9 +46,9 @@ public class FilmsPagerAdapter extends FragmentStatePagerAdapter {
             case 0 :
                 return mContext.getString(R.string.popular_films);
             case 1:
-                return mContext.getString(R.string.top_rated_films);
-            case 2:
                 return mContext.getString(R.string.upcoming_films);
+            case 2:
+                return mContext.getString(R.string.top_rated_films);
             default:
                 return "";
         }

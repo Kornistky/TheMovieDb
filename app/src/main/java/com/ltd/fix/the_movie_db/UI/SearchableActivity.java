@@ -1,4 +1,4 @@
-package com.ltd.fix.the_movie_db;
+package com.ltd.fix.the_movie_db.UI;
 
 import android.app.SearchManager;
 import android.net.Uri;
@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.fragments.FilmsListFragment;
 import com.ltd.fix.the_movie_db.network.MoviesRequestType;
 

@@ -27,11 +27,14 @@ public class FilmsListFragment extends Fragment {
     public static final String ARG_PARAM1="param_1";
     public static final String ARG_PARAM2="param_2";
 
-    private MoviesRequestType moviesRequestType;
+
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private MoviesRequestType moviesRequestType;
+    RestClient restClient;
 
     @Bind(R.id.rv)
     RecyclerView mRecyclerView;
@@ -43,8 +46,7 @@ public class FilmsListFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         mRecyclerView.setHasFixedSize(true);
-
-        RestClient restClient = new RestClient();
+        restClient = RestClient.getInstance().initialize();
         restClient.addListener(new RestClient.Listener() {
             @Override
             public void onFilmsLoaded(List<Movie> movies) {

@@ -16,7 +16,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.common.ResizeOptions;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-import com.ltd.fix.the_movie_db.Details;
+import com.ltd.fix.the_movie_db.UI.Details;
 import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.network.Movie;
 

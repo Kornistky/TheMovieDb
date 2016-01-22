@@ -1,4 +1,4 @@
-package com.ltd.fix.the_movie_db;
+package com.ltd.fix.the_movie_db.UI;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.ltd.fix.the_movie_db.R;
 import com.ltd.fix.the_movie_db.network.Movie;
 import com.ltd.fix.the_movie_db.network.MovieDetails;
 import com.ltd.fix.the_movie_db.network.RestClient;
@@ -20,9 +21,10 @@ import butterknife.ButterKnife;
 
 public class Details extends AppCompatActivity {
     public static final String ID_PARAM = "id_param";
-//    Context mContext;
+
     @Bind(R.id.toolbar)
     Toolbar toolbar = null;
+    RestClient restClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class Details extends AppCompatActivity {
 
     private void init() {
         Integer id = getIntent().getIntExtra(ID_PARAM, -1);
-        RestClient restClient = new RestClient();
+        restClient = RestClient.getInstance().initialize();
         restClient.addListener(new RestClient.Listener() {
             @Override
             public void onFilmsLoaded(List<Movie> movies) {

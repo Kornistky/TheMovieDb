@@ -1,9 +1,12 @@
-package com.ltd.fix.the_movie_db;
+package com.ltd.fix.the_movie_db.UI;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.ltd.fix.the_movie_db.MainActivity;
+import com.ltd.fix.the_movie_db.R;
 
 public class Splash extends Activity {
     public static final int time_out = 3000;
