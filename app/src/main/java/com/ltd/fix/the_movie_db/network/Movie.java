@@ -25,7 +25,7 @@ public class Movie {
 
     @SerializedName("id")
     @Expose
-    private Integer mId;
+    private  Integer mId;
 
 
     public String getTitle() {

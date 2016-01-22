@@ -30,7 +30,6 @@ import butterknife.OnClick;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<Movie> mData;
     Context mContext;
-    int width = 180, height = 180;
 
     @Override
     public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         return mData.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.item_text)
         TextView mTextView;
 
@@ -66,14 +65,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         private int mId;
 
-        @Nullable
-        @OnClick(R.id.card_view)
-        void onCardClicked() {
-            Intent intent = new Intent(mContext, Details.class);
-            intent.putExtra(Details.ID_PARAM, mId);
-            mContext.startActivity(intent);
-        }
-
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
@@ -84,11 +75,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             mOverview.setText(movie.getOverview());
             mReleaseDate.setText(movie.getReleaseDate());
             mId = movie.getId();
-
-
             ImageRequest request = ImageRequestBuilder
                     .newBuilderWithSource(Uri.parse(movie.getImagePath()))
-                    .setResizeOptions(new ResizeOptions(width, height))
                     .setAutoRotateEnabled(true)
                     .setLocalThumbnailPreviewsEnabled(true)
                     .setProgressiveRenderingEnabled(true)
@@ -100,7 +88,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             simpleDraweeView.setController(controller);
         }
     }
-
 
     public MyAdapter(Context context, List<Movie> Data) {
         mData = Data;

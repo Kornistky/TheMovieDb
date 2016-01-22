@@ -8,7 +8,7 @@ import retrofit.http.Query;
 /**
  * Created by fix on 18.01.16.
  */
-public interface TheMovieDbService {
+public interface MovieService {
     //https://api.themoviedb.org/3/movie/550?api_key=70975a712a50f1825d37028d9a9d58fb
 
     @GET("/3/movie/popular")

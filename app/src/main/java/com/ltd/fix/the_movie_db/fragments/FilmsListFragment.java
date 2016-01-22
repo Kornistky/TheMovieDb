@@ -1,15 +1,21 @@
 package com.ltd.fix.the_movie_db.fragments;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ltd.fix.the_movie_db.R;
+import com.ltd.fix.the_movie_db.UI.Details;
 import com.ltd.fix.the_movie_db.adapters.MyAdapter;
 import com.ltd.fix.the_movie_db.network.Movie;
 import com.ltd.fix.the_movie_db.network.MovieDetails;
@@ -20,9 +26,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class FilmsListFragment extends Fragment {
+
     private static final String MOVIE_TYPE = "movie_type";
     public static final String ARG_PARAM1="param_1";
     public static final String ARG_PARAM2="param_2";
@@ -31,6 +39,9 @@ public class FilmsListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+
+    Context context;
     private OnFragmentInteractionListener mListener;
 
     private MoviesRequestType moviesRequestType;
@@ -39,13 +50,24 @@ public class FilmsListFragment extends Fragment {
     @Bind(R.id.rv)
     RecyclerView mRecyclerView;
 
+
+
     public FilmsListFragment() {
     }
 
     private void Init() {
-
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getContext(), Details.class);
+                        intent.putExtra(Details.ID_PARAM, "");
+                        startActivity(intent);
+                    }
+                })
+        );
         restClient = RestClient.getInstance().initialize();
         restClient.addListener(new RestClient.Listener() {
             @Override
@@ -75,6 +97,8 @@ public class FilmsListFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +117,7 @@ public class FilmsListFragment extends Fragment {
         Init();
         return view;
     }
+
 
     @Override
     public void onDetach() {

@@ -31,14 +31,15 @@ public final class RestClient {
 
     List<Listener> mListeners = new ArrayList<>();
 
-    public void addListener(Listener l) {
+    public void addListener(Listener l)
+    {
         mListeners.add(l);
     }
 
     private RestClient(){
     }
 
-    TheMovieDbService mService;
+    MovieService mService;
 
     public RestClient initialize() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -47,7 +48,7 @@ public final class RestClient {
                 .build();
         OkHttpClient client = retrofit.client();
         client.interceptors().add(new AuthInterceptor(API_KEY));
-        INSTANCE.mService = retrofit.create(TheMovieDbService.class);
+        INSTANCE.mService = retrofit.create(MovieService.class);
         return INSTANCE;
     }
 
@@ -111,7 +112,7 @@ public final class RestClient {
                 Movies model = response.body();
                 if (model == null)
                     return;
-                List<Movie> myMovies = model.getMovies();
+                List<Movie> myMovies = model.getResults();
                 for (Listener l : mListeners)
                     l.onFilmsLoaded(myMovies);
             }

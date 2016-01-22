@@ -34,9 +34,7 @@
             android:id="@+id/item_act"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            fresco:roundAsCircle="true"
-            fresco:roundedCornerRadius="1dp"
-            fresco:roundingBorderWidth="2dp" />
+            fresco:roundAsCircle="true"/>
 
         <TextView
             android:id="@+id/tagline"
